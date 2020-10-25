@@ -3,6 +3,7 @@ const express= require('express')
 const hbs = require('hbs')
 const myfuncs = require('./Utils/geocode')
 const app= express()
+const port = process.env.PORT || 3000
 
 //define paths for express configuration
 const publicDirectoryPath = path.join(__dirname,'../public')
@@ -11,11 +12,6 @@ const partialsPath = path.join(__dirname,'../templates/partials')
 
 
 app.use(express.static(publicDirectoryPath))
-
-app.listen('3000', () => {
-    console.log('Server is up at port 3000')
-})
-
 
 //handlebars engine setup and views location
 app.set('view engine','hbs')
@@ -73,4 +69,9 @@ res.render('404',{msg: 'Help article not found', name: 'Vedik Shetty'})
 app.get('*', (req,res) =>
 {
 res.render('404',{msg: 'My 404 Page!!', name: 'Vedik Shetty'})
+})
+
+
+app.listen(port, () => {
+  console.log('Server is up at port ' + port)
 })
